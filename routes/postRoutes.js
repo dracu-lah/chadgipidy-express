@@ -1,26 +1,23 @@
-// routes/userRoutes.js
+// routes/postRoutes.js
 import express from "express";
 import {
-  getUsers,
-  createUser,
-  deleteUsers,
-} from "../controllers/userController.js";
-import authenticateToken from "../middleware/authMiddleware.js";
+  getPosts,
+  createPost,
+  deletePost,
+} from "../controllers/postController.js";
 
 const router = express.Router();
 
 /**
  * @swagger
- * /api/users:
+ * /api/posts:
  *   get:
  *     tags:
- *       - users
- *     summary: Retrieve a list of users
- *     security:
- *       - bearerAuth: []
+ *       - posts
+ *     summary: Retrieve a list of posts
  *     responses:
  *       200:
- *         description: A list of users.
+ *         description: A list of posts.
  *         content:
  *           application/json:
  *             schema:
@@ -30,20 +27,22 @@ const router = express.Router();
  *                 properties:
  *                   id:
  *                     type: integer
- *                   firstName:
+ *                   title:
  *                     type: string
- *                   lastName:
+ *                   content:
  *                     type: string
+ *                   userId:
+ *                     type: integer
  */
-router.get("/users", authenticateToken, getUsers);
+router.get("/posts", getPosts);
 
 /**
  * @swagger
- * /api/users:
+ * /api/posts:
  *   post:
  *     tags:
- *       - users
- *     summary: Create a new user
+ *       - posts
+ *     summary: Create a new post
  *     requestBody:
  *       required: true
  *       content:
@@ -51,27 +50,35 @@ router.get("/users", authenticateToken, getUsers);
  *           schema:
  *             type: object
  *             properties:
- *               firstName:
+ *               title:
  *                 type: string
- *               lastName:
+ *               content:
  *                 type: string
+ *               userId:
+ *                 type: integer
  *     responses:
  *       201:
- *         description: The created user.
+ *         description: The created post.
  */
-router.post("/users", createUser);
+router.post("/posts", createPost);
 
 /**
  * @swagger
- * /api/users:
+ * /api/posts/{id}:
  *   delete:
  *     tags:
- *       - users
- *     summary: Delete all users
+ *       - posts
+ *     summary: Delete a post by ID
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
  *     responses:
  *       204:
  *         description: No content.
  */
-router.delete("/users", deleteUsers);
+router.delete("/posts/:id", deletePost);
 
 export default router;
