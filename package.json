@@ -12,7 +12,10 @@
   "description": "",
   "dependencies": {
     "express": "^4.19.2",
+    "express-list-endpoints": "^7.1.0",
     "sequelize": "^6.37.3",
-    "sqlite3": "^5.1.7"
+    "sqlite3": "^5.1.7",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
   }
 }
